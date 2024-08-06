@@ -16,12 +16,18 @@ public class BallBrokenFloor {
         if (floor > nFloors) {
             throw new IllegalArgumentException();
         }
-        if (floor >= minBrokenFloor){
+        if (floor >= minBrokenFloor) {
             throw new Exception("ball is broken");
         }
     }
-    public int getMinBrokenFloor(){
-        //used only for testing purposes
+
+    public int getMinBrokenFloor() {
+        // used only for testing purposes
         return minBrokenFloor;
     }
-  }
+
+    public int getNFloors() {
+        // used only for testing purposes
+        return nFloors;
+    }
+}

@@ -6,10 +6,21 @@ import org.junit.jupiter.api.Test;
 public class BrokenFloorTest {
 
     private int getMinimalBrokenFloor(BallBrokenFloor bbf) {
-        // TODO
-        // Using only method checkFloor to find out minimal broken floor
-        // by applying binary search and handling exceptions
-        return -1;
+        int bottomFloor = 0;
+        int topFloor = bbf.getNFloors();
+        int res = -1;
+
+        while (bottomFloor <= topFloor) {
+            int mid = bottomFloor + (topFloor - bottomFloor) / 2;
+            try {
+                bbf.checkFloor(mid);
+                bottomFloor = mid + 1;
+            } catch (Exception e) {
+                res = mid;
+                topFloor = mid - 1;
+            }
+        }
+        return res;
     }
 
     @Test
@@ -19,6 +30,5 @@ public class BrokenFloorTest {
             BallBrokenFloor bbf = new BallBrokenFloor(floors[i]);
             assertEquals(bbf.getMinBrokenFloor(), getMinimalBrokenFloor(bbf));
         }
-
     }
 }

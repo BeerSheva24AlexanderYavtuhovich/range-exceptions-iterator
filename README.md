@@ -1,2 +1,3 @@
-# CW14 - range-exceptions-iterator
+# HW14 - getMinimalBrokenFloor method added
 ## Testing:
+![alt text](image.png)
