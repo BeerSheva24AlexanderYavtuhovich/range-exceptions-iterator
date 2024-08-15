@@ -2,7 +2,6 @@
 ## Testing:
 ![alt text](image.png)
 
-# HW18
-## RangeIterator for iterating only the numbers matching a given predicate
-### if predicate is null all numbers should be iterated
-
+# HW18 - RangeIterator Solution
+## Testing:
+![alt text](image-1.png)

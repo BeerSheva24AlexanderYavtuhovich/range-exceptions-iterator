@@ -27,15 +27,18 @@ public class Range implements Iterable<Integer> {
 
         @Override
         public boolean hasNext() {
-            // TODO
-
-            return false;
+            while (current <= max && !predicate.test(current)) {
+                current++;
+            }
+            return current <= max;
         }
 
         @Override
         public Integer next() {
-            // TODO
-            return -1;
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            return current++;
         }
 
     }
