@@ -34,13 +34,12 @@ public class Range implements Iterable<Integer> {
         }
 
         private int find(int start) {
-            int temp = start;
             int res = max + 1;
-            while (temp <= max && res == max + 1) {
-                if (predicate.test(temp)) {
-                    res = temp;
+            while (start <= max && res == max + 1) {
+                if (predicate.test(start)) {
+                    res = start;
                 }
-                temp++;
+                start++;
             }
             return res;
         }
