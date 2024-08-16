@@ -74,16 +74,16 @@ public class RangeTest {
         assertThrowsExactly(NoSuchElementException.class, primeIterator::next);
 
         // evensTesting
-        Iterator<Integer> evenIterator = rangeMath.iterator();
         rangeMath.setPredicate(evenPredicate);
+        Iterator<Integer> evenIterator = rangeMath.iterator();
         Integer[] actualEvens = arrayCollector(evens.length, evenIterator);
         assertArrayEquals(evens, actualEvens);
         assertThrowsExactly(NoSuchElementException.class, evenIterator::next);
 
         // odsTesting
-        Iterator<Integer> oddsIterator = rangeMath.iterator();
         rangeMath.setPredicate(oddsPredicate);
-        Integer[] actualOdds = arrayCollector(evens.length, oddsIterator);
+        Iterator<Integer> oddsIterator = rangeMath.iterator();
+        Integer[] actualOdds = arrayCollector(odds.length, oddsIterator);
         assertArrayEquals(odds, actualOdds);
         assertThrowsExactly(NoSuchElementException.class, oddsIterator::next);
 
@@ -102,21 +102,21 @@ public class RangeTest {
         assertThrowsExactly(NoSuchElementException.class, squaresIterator::next);
 
         // multiplesOfSevenTesting
-        Iterator<Integer> multiplesOfSevenIterator = rangeMath.iterator();
         rangeMath.setPredicate(multiplesOfSevenPredicate);
+        Iterator<Integer> multiplesOfSevenIterator = rangeMath.iterator();
         Integer[] actualMultiplesOfSeven = arrayCollector(multiplesOfSeven.length, multiplesOfSevenIterator);
         assertArrayEquals(multiplesOfSeven, actualMultiplesOfSeven);
         assertThrowsExactly(NoSuchElementException.class, multiplesOfSevenIterator::next);
 
         // powersOfTwoTesting
-        Iterator<Integer> powersOfTwoIterator = rangeMath.iterator();
         rangeMath.setPredicate(powersOfTwoPredicate);
+        Iterator<Integer> powersOfTwoIterator = rangeMath.iterator();
         Integer[] actualPowersOfTwo = arrayCollector(powersOfTwo.length, powersOfTwoIterator);
         assertArrayEquals(powersOfTwo, actualPowersOfTwo);
         assertThrowsExactly(NoSuchElementException.class, powersOfTwoIterator::next);
 
     }
-    
+
     private Integer[] arrayCollector(int expectedArrayLength, Iterator<Integer> iterator) {
         Integer[] actual = new Integer[expectedArrayLength];
         int index = 0;

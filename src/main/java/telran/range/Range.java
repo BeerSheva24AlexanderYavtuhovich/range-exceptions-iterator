@@ -14,6 +14,9 @@ public class Range implements Iterable<Integer> {
     private Predicate<Integer> predicate;
 
     private Range(int min, int max) {
+        if (max <= min) {
+            throw new IllegalArgumentException(ERROR_MAX_LESS_OR_EQUAL_MIN);
+        }
         this.min = min;
         this.max = max;
     }
@@ -24,45 +27,57 @@ public class Range implements Iterable<Integer> {
     }
 
     private class RangeIterator implements Iterator<Integer> {
-        int current = min;
-        Integer cachedEl = null;
+        private int current; 
+        
+        private RangeIterator() {
+            this.current = findFirst();
+        }
 
-        @Override
-        public boolean hasNext() {
-            boolean res = false;
-            int temp = current;
-            while (temp <= max && !res) {
+        private int findFirst() {
+            int temp = min;
+            while (temp <= max) {
                 if (predicate.test(temp)) {
-                    cachedEl = temp;
-                    res = true;
+                    return temp;
                 }
                 temp++;
             }
-            return res;
+            return max + 1;
+        }
+
+
+        private int findNext(int start) {
+            int temp = start;
+            while (temp <= max) {
+                if (predicate.test(temp)) {
+                    return temp;
+                }
+                temp++;
+            }
+            return max + 1; 
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current <= max;
         }
 
         @Override
         public Integer next() {
-
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            Integer res = cachedEl;
-            cachedEl = null;
-            current = res + 1;
-            return res;
+            Integer result = current;
+            current = findNext(current + 1); 
+            return result;
         }
+    }
+
+    public void setPredicate(Predicate<Integer> predicate) {
+        this.predicate = predicate;
     }
 
     public static Range getRange(int min, int max) {
-        if (max <= min) {
-            throw new IllegalArgumentException(ERROR_MAX_LESS_OR_EQUAL_MIN);
-        }
         return new Range(min, max);
-    }
-
-    void setPredicate(Predicate<Integer> predicate) {
-        this.predicate = predicate;
     }
 
     public void checkNumber(int number) throws OutOfRangeMaxValueExceptions, OutOfRangeMinValueExceptions {
